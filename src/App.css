@@ -1,0 +1,11 @@
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'SF Pro Text',
+    'Segoe UI', sans-serif;
+  background-color: #f8fafc;
+  color: #020617;
+}
+
+#root {
+  min-height: 100vh;
+}

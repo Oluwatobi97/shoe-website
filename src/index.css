@@ -1,0 +1,38 @@
+@import "tailwindcss";
+
+@source "../index.html";
+@source "./**/*.{js,ts,jsx,tsx}";
+
+@theme {
+  --color-purple-light: #FBF2FF;
+  --color-purple-medium: #DC86FA;
+  --color-purple-deep: #AA00D7;
+  --color-purple-rich: #9600B3;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animated-bg {
+  background: linear-gradient(45deg, #fbf2ff, #dc86fa, #aa00d7);
+  background-size: 300% 300%;
+  animation: gradientShift 10s ease infinite;
+}
+.logo-glow:hover {
+  text-shadow:
+    0 0 10px rgba(170, 0, 215, 0.5),
+    0 0 20px rgba(170, 0, 215, 0.3);
+}
+
+.logo-glow {
+  transition: text-shadow 0.3s ease;
+}
