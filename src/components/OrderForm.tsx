@@ -1,4 +1,4 @@
-import { FormEvent, useState } from 'react'
+import { useState, type FormEvent } from "react";
 import type { Product } from '../types/Product'
 
 interface OrderFormProps {
