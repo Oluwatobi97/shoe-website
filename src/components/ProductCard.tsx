@@ -1,8 +1,8 @@
-import type { Product } from '../types/Product'
-import { Link } from 'react-router-dom'
+import type { Product } from "../types/Product";
+import { Link } from "react-router-dom";
 
 interface ProductCardProps {
-  product: Product
+  product: Product;
 }
 
 export function ProductCard({ product }: ProductCardProps) {
@@ -28,7 +28,7 @@ export function ProductCard({ product }: ProductCardProps) {
 
         <div className="mt-auto flex items-center justify-between">
           <p className="text-lg font-semibold text-purple-rich">
-            ${product.price.toFixed(2)}
+            #{product.price.toFixed(2)}
           </p>
 
           <Link
@@ -40,6 +40,5 @@ export function ProductCard({ product }: ProductCardProps) {
         </div>
       </div>
     </article>
-  )
+  );
 }
-
