@@ -1,22 +1,22 @@
 import { useState, type FormEvent } from "react";
-import type { Product } from '../types/Product'
+import type { Product } from "../types/Product";
 
 interface OrderFormProps {
-  product: Product
-  quantity: number
-  onClose: () => void
+  product: Product;
+  quantity: number;
+  onClose: () => void;
 }
 
 export function OrderForm({ product, quantity, onClose }: OrderFormProps) {
-  const [fullName, setFullName] = useState('')
-  const [phone, setPhone] = useState('')
-  const [submitting, setSubmitting] = useState(false)
+  const [fullName, setFullName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [submitting, setSubmitting] = useState(false);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    if (!fullName.trim() || !phone.trim()) return
+    e.preventDefault();
+    if (!fullName.trim() || !phone.trim()) return;
 
-    setSubmitting(true)
+    setSubmitting(true);
 
     const orderDetails = {
       productId: product.id,
@@ -25,14 +25,14 @@ export function OrderForm({ product, quantity, onClose }: OrderFormProps) {
       fullName: fullName.trim(),
       phone: phone.trim(),
       totalPrice: product.price * quantity,
-    }
+    };
 
-    console.log('Order submitted:', orderDetails)
-    alert('Order Submitted Successfully')
+    console.log("Order submitted:", orderDetails);
+    alert("Order Submitted Successfully");
 
-    setSubmitting(false)
-    onClose()
-  }
+    setSubmitting(false);
+    onClose();
+  };
 
   return (
     <div className="fixed inset-0 z-40 flex items-center justify-center bg-black/40 px-4 backdrop-blur-sm">
@@ -51,8 +51,7 @@ export function OrderForm({ product, quantity, onClose }: OrderFormProps) {
             onClick={onClose}
             className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-purple-light text-slate-500 transition hover:bg-purple-light/60 hover:text-slate-700"
           >
-            <span className="sr-only">Close</span>
-            ×
+            <span className="sr-only">Close</span>×
           </button>
         </div>
 
@@ -112,11 +111,10 @@ export function OrderForm({ product, quantity, onClose }: OrderFormProps) {
             disabled={submitting || !fullName.trim() || !phone.trim()}
             className="mt-2 inline-flex w-full items-center justify-center rounded-full bg-gradient-to-r from-purple-deep to-purple-rich px-4 py-2.5 text-sm font-medium text-white shadow-sm transition hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-deep focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:bg-purple-light"
           >
-            {submitting ? 'Submitting...' : 'Confirm Order'}
+            {submitting ? "Submitting..." : "Confirm Order"}
           </button>
         </form>
       </div>
     </div>
-  )
+  );
 }
-
