@@ -1,5 +1,5 @@
-import { products } from '../data/products'
-import { ProductCard } from '../components/ProductCard'
+import { products } from "../data/products";
+import { ProductCard } from "../components/ProductCard";
 
 export function Home() {
   return (
@@ -8,10 +8,11 @@ export function Home() {
         <header className="mb-8 flex flex-col gap-3 sm:mb-10 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <h1 className="bg-gradient-to-r from-purple-deep to-purple-rich bg-clip-text text-3xl font-semibold tracking-tight text-transparent sm:text-4xl">
-              Our Products
+              Step Into Timeless Leather Craftsmanship
             </h1>
             <p className="mt-2 max-w-xl text-sm text-slate-500 sm:text-base">
-              Discover minimal, everyday essentials designed for comfort, style, and performance.
+              Premium handcrafted leather shoes designed for comfort and style.
+              Explore our collection
             </p>
           </div>
         </header>
@@ -23,6 +24,5 @@ export function Home() {
         </div>
       </div>
     </section>
-  )
+  );
 }
-
