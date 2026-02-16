@@ -1,27 +1,29 @@
-import { useState } from 'react'
-import { useParams, Link } from 'react-router-dom'
-import { products } from '../data/products'
-import type { Product } from '../types/Product'
-import { OrderForm } from '../components/OrderForm'
+import { useState } from "react";
+import { useParams, Link } from "react-router-dom";
+import { products } from "../data/products";
+import type { Product } from "../types/Product";
+import { OrderForm } from "../components/OrderForm";
 
 export function ProductDetails() {
-  const { id } = useParams<{ id: string }>()
-  const product = products.find((p) => p.id === id) as Product | undefined
+  const { id } = useParams<{ id: string }>();
+  const product = products.find((p) => p.id === id) as Product | undefined;
 
-  const [quantity, setQuantity] = useState(1)
-  const [showOrderForm, setShowOrderForm] = useState(false)
+  const [quantity, setQuantity] = useState(1);
+  const [showOrderForm, setShowOrderForm] = useState(false);
 
   if (!product) {
     return (
       <main className="flex min-h-[60vh] items-center justify-center px-4">
         <div className="max-w-md rounded-2xl bg-white/80 p-6 text-center shadow-lg shadow-purple-deep/10">
-          <p className="text-sm font-medium text-purple-deep">Product not found</p>
+          <p className="text-sm font-medium text-purple-deep">
+            Product not found
+          </p>
           <h1 className="mt-2 text-2xl font-semibold tracking-tight text-slate-900">
             We couldn&apos;t find that item
           </h1>
           <p className="mt-2 text-sm text-slate-500">
-            The product you&apos;re looking for may have been moved or is temporarily
-            unavailable.
+            The product you&apos;re looking for may have been moved or is
+            temporarily unavailable.
           </p>
           <Link
             to="/"
@@ -31,20 +33,20 @@ export function ProductDetails() {
           </Link>
         </div>
       </main>
-    )
+    );
   }
 
-  const increaseQuantity = () => setQuantity((prev) => prev + 1)
+  const increaseQuantity = () => setQuantity((prev) => prev + 1);
   const decreaseQuantity = () =>
-    setQuantity((prev) => (prev > 1 ? prev - 1 : 1))
+    setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
 
   const handleOrderClick = () => {
-    setShowOrderForm(true)
-  }
+    setShowOrderForm(true);
+  };
 
   const handleCloseForm = () => {
-    setShowOrderForm(false)
-  }
+    setShowOrderForm(false);
+  };
 
   return (
     <main className="py-6 sm:py-8 lg:py-10">
@@ -70,11 +72,13 @@ export function ProductDetails() {
               <h1 className="bg-gradient-to-r from-purple-deep to-purple-rich bg-clip-text text-3xl font-semibold tracking-tight text-transparent">
                 {product.name}
               </h1>
-              <p className="mt-2 text-sm text-slate-500">{product.description}</p>
+              <p className="mt-2 text-sm text-slate-500">
+                {product.description}
+              </p>
             </div>
 
             <p className="text-2xl font-semibold text-purple-rich">
-              ${product.price.toFixed(2)}
+              #{product.price.toFixed(2)}
             </p>
 
             <div className="space-y-3">
@@ -119,6 +123,5 @@ export function ProductDetails() {
         />
       )}
     </main>
-  )
+  );
 }
-
