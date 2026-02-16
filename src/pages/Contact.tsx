@@ -25,7 +25,7 @@ export function Contact() {
     <section className="space-y-6 rounded-3xl bg-white/80 p-6 text-sm text-slate-600 shadow-xl shadow-purple-deep/15 sm:p-8 lg:p-10">
       <div className="space-y-2">
         <h1 className="bg-gradient-to-r from-purple-deep to-purple-rich bg-clip-text text-3xl font-semibold tracking-tight text-transparent sm:text-4xl">
-          Contact me Us
+          Contact Us
         </h1>
         <p>
           Have a question or feedback about T&amp;K? Send us a quick message and
