@@ -3,13 +3,16 @@
 @source "../index.html";
 @source "./**/*.{js,ts,jsx,tsx}";
 
+/* Theme colors for black & white */
 @theme {
-  --color-purple-light: #FBF2FF;
-  --color-purple-medium: #DC86FA;
-  --color-purple-deep: #AA00D7;
-  --color-purple-rich: #9600B3;
+  --color-black: #111111;
+  --color-white: #fafafa;
+  --color-gray-light: #f3f3f3;
+  --color-gray-medium: #cccccc;
+  --color-gray-dark: #333333;
 }
 
+/* Optional subtle gradient for background animation */
 @keyframes gradientShift {
   0% {
     background-position: 0% 50%;
@@ -22,15 +25,23 @@
   }
 }
 
+/* Animated background for subtle effect (black & white) */
 .animated-bg {
-  background: linear-gradient(45deg, #fbf2ff, #dc86fa, #aa00d7);
+  background: linear-gradient(
+    45deg,
+    var(--color-black),
+    var(--color-gray-dark),
+    var(--color-gray-medium)
+  );
   background-size: 300% 300%;
-  animation: gradientShift 10s ease infinite;
+  animation: gradientShift 15s ease infinite;
 }
+
+/* Logo hover glow (subtle white glow) */
 .logo-glow:hover {
   text-shadow:
-    0 0 10px rgba(170, 0, 215, 0.5),
-    0 0 20px rgba(170, 0, 215, 0.3);
+    0 0 5px rgba(255, 255, 255, 0.5),
+    0 0 10px rgba(255, 255, 255, 0.3);
 }
 
 .logo-glow {

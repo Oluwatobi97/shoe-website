@@ -9,87 +9,129 @@ export function Contact() {
     e.preventDefault();
     if (!name.trim() || !email.trim() || !message.trim()) return;
 
-    console.log("Contact form submitted:", {
-      name: name.trim(),
-      email: email.trim(),
-      message: message.trim(),
+    console.log({
+      name,
+      email,
+      message,
     });
 
-    alert("Message sent! We'll get back to you soon.");
+    alert("Message sent successfully.");
     setName("");
     setEmail("");
     setMessage("");
   };
 
   return (
-    <section className="space-y-6 rounded-3xl bg-white/80 p-6 text-sm text-slate-600 shadow-xl shadow-purple-deep/15 sm:p-8 lg:p-10">
-      <div className="space-y-2">
-        <h1 className="bg-gradient-to-r from-purple-deep to-purple-rich bg-clip-text text-3xl font-semibold tracking-tight text-transparent sm:text-4xl">
-          Contact Us
-        </h1>
-        <p>
-          Have a question or feedback about T&amp;K? Send us a quick message and
-          we&apos;ll respond as soon as we can.
-        </p>
-      </div>
+    <section className="flex justify-center py-10">
+      <div
+        className="
+          w-full max-w-3xl
+          rounded-3xl
+          border border-white/10
+          bg-white/5
+          backdrop-blur-xl
+          p-8 sm:p-10
+          shadow-2xl
+        "
+      >
+        {/* Header */}
+        <div className="mb-8 space-y-3">
+          <h1 className="text-3xl font-semibold tracking-tight">Contact Us</h1>
 
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div className="space-y-1">
-          <label htmlFor="name" className="text-sm font-medium text-slate-800">
-            Full Name
-          </label>
-          <input
-            id="name"
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-            className="w-full rounded-lg border border-purple-light bg-white px-3 py-2 text-sm text-slate-900 shadow-sm outline-none transition focus:border-purple-deep focus:ring-1 focus:ring-purple-deep"
-            placeholder="Enter your full name"
-          />
+          <p className="text-white/70">
+            Have a question about T&amp;K? Send us a message and our team will
+            respond shortly.
+          </p>
         </div>
 
-        <div className="space-y-1">
-          <label htmlFor="email" className="text-sm font-medium text-slate-800">
-            Email
-          </label>
-          <input
-            id="email"
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            className="w-full rounded-lg border border-purple-light bg-white px-3 py-2 text-sm text-slate-900 shadow-sm outline-none transition focus:border-purple-deep focus:ring-1 focus:ring-purple-deep"
-            placeholder="you@example.com"
-          />
-        </div>
+        {/* Form */}
+        <form onSubmit={handleSubmit} className="space-y-5">
+          {/* Name */}
+          <div className="space-y-2">
+            <label className="text-sm text-white/80">Full Name</label>
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="John Doe"
+              className="
+                w-full rounded-xl
+                border border-white/20
+                bg-white/10
+                px-4 py-3
+                text-white
+                placeholder-white/40
+                backdrop-blur
+                outline-none
+                transition
+                focus:border-white
+              "
+            />
+          </div>
 
-        <div className="space-y-1">
-          <label
-            htmlFor="message"
-            className="text-sm font-medium text-slate-800"
+          {/* Email */}
+          <div className="space-y-2">
+            <label className="text-sm text-white/80">Email</label>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="you@example.com"
+              className="
+                w-full rounded-xl
+                border border-white/20
+                bg-white/10
+                px-4 py-3
+                text-white
+                placeholder-white/40
+                backdrop-blur
+                outline-none
+                transition
+                focus:border-white
+              "
+            />
+          </div>
+
+          {/* Message */}
+          <div className="space-y-2">
+            <label className="text-sm text-white/80">Message</label>
+            <textarea
+              rows={5}
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              placeholder="Tell us how we can help..."
+              className="
+                w-full resize-none rounded-xl
+                border border-white/20
+                bg-white/10
+                px-4 py-3
+                text-white
+                placeholder-white/40
+                backdrop-blur
+                outline-none
+                transition
+                focus:border-white
+              "
+            />
+          </div>
+
+          {/* Button */}
+          <button
+            type="submit"
+            disabled={!name || !email || !message}
+            className="
+              w-full rounded-full
+              bg-white text-black
+              py-3 font-medium
+              transition
+              hover:brightness-110
+              disabled:opacity-40
+            "
           >
-            Message
-          </label>
-          <textarea
-            id="message"
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            required
-            rows={4}
-            className="w-full resize-none rounded-lg border border-purple-light bg-white px-3 py-2 text-sm text-slate-900 shadow-sm outline-none transition focus:border-purple-deep focus:ring-1 focus:ring-purple-deep"
-            placeholder="Tell us how we can help..."
-          />
-        </div>
-
-        <button
-          type="submit"
-          disabled={!name.trim() || !email.trim() || !message.trim()}
-          className="mt-2 inline-flex w-full items-center justify-center rounded-full bg-gradient-to-r from-purple-deep to-purple-rich px-4 py-2.5 text-sm font-medium text-white shadow-sm transition hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-deep focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:bg-purple-light"
-        >
-          Send Message
-        </button>
-      </form>
+            Send Message
+          </button>
+        </form>
+      </div>
     </section>
   );
 }

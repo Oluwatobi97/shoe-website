@@ -13,21 +13,12 @@ export function ProductDetails() {
 
   if (!product) {
     return (
-      <main className="flex min-h-[60vh] items-center justify-center px-4">
-        <div className="max-w-md rounded-2xl bg-white/80 p-6 text-center shadow-lg shadow-purple-deep/10">
-          <p className="text-sm font-medium text-purple-deep">
-            Product not found
-          </p>
-          <h1 className="mt-2 text-2xl font-semibold tracking-tight text-slate-900">
-            We couldn&apos;t find that item
-          </h1>
-          <p className="mt-2 text-sm text-slate-500">
-            The product you&apos;re looking for may have been moved or is
-            temporarily unavailable.
-          </p>
+      <main className="flex min-h-screen items-center justify-center px-4">
+        <div className="rounded-3xl bg-[#2b1f17]/80 backdrop-blur-xl p-8 text-center text-white shadow-2xl">
+          <h1 className="text-2xl font-semibold">Product not found</h1>
           <Link
             to="/"
-            className="mt-6 inline-flex items-center justify-center rounded-full bg-gradient-to-r from-purple-deep to-purple-rich px-4 py-2 text-sm font-medium text-white shadow-sm transition hover:brightness-110"
+            className="mt-6 inline-block rounded-full bg-[#e6c9a8] px-5 py-2 text-sm font-medium text-[#2b1f17]"
           >
             Back to products
           </Link>
@@ -36,78 +27,121 @@ export function ProductDetails() {
     );
   }
 
-  const increaseQuantity = () => setQuantity((prev) => prev + 1);
-  const decreaseQuantity = () =>
-    setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
-
-  const handleOrderClick = () => {
-    setShowOrderForm(true);
-  };
-
-  const handleCloseForm = () => {
-    setShowOrderForm(false);
-  };
+  const increaseQuantity = () => setQuantity((q) => q + 1);
+  const decreaseQuantity = () => setQuantity((q) => (q > 1 ? q - 1 : 1));
 
   return (
-    <main className="py-6 sm:py-8 lg:py-10">
-      <section className="rounded-3xl bg-white/80 p-6 shadow-xl shadow-purple-deep/15 sm:p-8 lg:p-10">
+    <main
+      className="
+        min-h-screen px-4 py-10
+        bg-gradient-to-br
+        from-[#3b2a1f]
+        via-[#2b1f17]
+        to-[#140e09]
+        text-white
+      "
+    >
+      <section
+        className="
+          mx-auto max-w-6xl
+          rounded-3xl
+          border border-white/10
+          bg-white/5
+          backdrop-blur-xl
+          p-6 sm:p-10
+          shadow-2xl
+        "
+      >
+        {/* Back */}
         <Link
           to="/"
-          className="inline-flex items-center text-sm font-medium text-purple-rich transition hover:text-purple-deep"
+          className="text-sm text-white/70 hover:text-white transition"
         >
           ← Back to products
         </Link>
 
-        <div className="mt-6 grid gap-10 md:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] md:items-center">
-          <div className="overflow-hidden rounded-3xl bg-purple-light/60 shadow-sm">
+        <div className="mt-8 grid gap-12 md:grid-cols-2 items-center">
+          {/* ================= IMAGE ================= */}
+          <div className="group relative overflow-hidden rounded-3xl">
+            {/* glass glow */}
+            <div className="absolute inset-0 bg-white/5 opacity-0 transition group-hover:opacity-100" />
+
             <img
               src={product.image}
               alt={product.name}
-              className="h-full w-full object-cover"
+              className="
+                w-full h-full object-cover
+                transition duration-700
+                group-hover:scale-110
+              "
             />
           </div>
 
+          {/* ================= INFO ================= */}
           <div className="space-y-6">
+            {/* Title */}
             <div>
-              <h1 className="bg-gradient-to-r from-purple-deep to-purple-rich bg-clip-text text-3xl font-semibold tracking-tight text-transparent">
+              <h1 className="text-4xl font-semibold tracking-tight">
                 {product.name}
               </h1>
-              <p className="mt-2 text-sm text-slate-500">
+
+              <p className="mt-3 text-white/70 leading-relaxed">
                 {product.description}
               </p>
             </div>
 
-            <p className="text-2xl font-semibold text-purple-rich">
-              #{product.price.toFixed(2)}
+            {/* Price */}
+            <p className="text-3xl font-semibold text-[#e6c9a8]">
+              ₦{product.price.toLocaleString()}
             </p>
 
+            {/* Quantity Selector */}
             <div className="space-y-3">
-              <p className="text-sm font-medium text-slate-700">Quantity</p>
-              <div className="inline-flex items-center gap-3 rounded-full border border-purple-light bg-white px-3 py-2 shadow-sm">
+              <p className="text-sm text-white/70">Quantity</p>
+
+              <div
+                className="
+                  inline-flex items-center gap-5
+                  rounded-full
+                  border border-white/20
+                  bg-white/10
+                  backdrop-blur-md
+                  px-5 py-2
+                "
+              >
                 <button
-                  type="button"
                   onClick={decreaseQuantity}
-                  className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-purple-light text-base font-medium text-slate-700 transition hover:bg-purple-light/60"
+                  className="text-xl hover:text-[#e6c9a8] transition"
                 >
-                  -
+                  −
                 </button>
-                <span className="w-8 text-center text-sm font-medium text-slate-900">
-                  {quantity}
-                </span>
+
+                <span className="text-lg font-medium">{quantity}</span>
+
                 <button
-                  type="button"
                   onClick={increaseQuantity}
-                  className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-purple-light text-base font-medium text-slate-700 transition hover:bg-purple-light/60"
+                  className="text-xl hover:text-[#e6c9a8] transition"
                 >
                   +
                 </button>
               </div>
             </div>
 
+            {/* Luxury Buy Button */}
             <button
-              type="button"
-              onClick={handleOrderClick}
-              className="inline-flex w-full items-center justify-center rounded-full bg-gradient-to-r from-purple-deep to-purple-rich px-4 py-2.5 text-sm font-medium text-white shadow-sm transition hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-deep focus-visible:ring-offset-2 md:w-auto"
+              onClick={() => setShowOrderForm(true)}
+              className="
+                w-full sm:w-auto
+                rounded-full
+                bg-[#e6c9a8]
+                px-8 py-3
+                font-semibold
+                text-[#2b1f17]
+                shadow-lg
+                transition-all duration-300
+                hover:scale-[1.03]
+                hover:brightness-110
+              "
             >
               Order Now
             </button>
@@ -115,11 +149,12 @@ export function ProductDetails() {
         </div>
       </section>
 
+      {/* Order Modal */}
       {showOrderForm && (
         <OrderForm
           product={product}
           quantity={quantity}
-          onClose={handleCloseForm}
+          onClose={() => setShowOrderForm(false)}
         />
       )}
     </main>

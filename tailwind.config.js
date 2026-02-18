@@ -4,10 +4,11 @@ export default {
   theme: {
     extend: {
       colors: {
-        purpleLight: "#FBF2FF",
-        purpleMedium: "#DC86FA",
-        purpleDeep: "#AA00D7",
-        purpleRich: "#9600B3",
+        primary: "#0A0A0A", // main black
+        secondary: "#1A1A1A", // soft black
+        borderSoft: "#E5E5E5", // borders
+        softWhite: "#FAFAFA", // background
+        pureWhite: "#FFFFFF",
       },
     },
   },
