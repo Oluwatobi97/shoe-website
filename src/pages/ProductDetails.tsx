@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import { products } from "../data/products";
-import type { Product } from "../types/Product";
+import { products } from "./products";
+import type { Product } from "./Product";
 import { OrderForm } from "../components/OrderForm";
 
 export function ProductDetails() {
@@ -13,7 +13,7 @@ export function ProductDetails() {
 
   if (!product) {
     return (
-      <main className="flex min-h-screen items-center justify-center px-4">
+      <div className="flex min-h-[60vh] items-center justify-center">
         <div className="rounded-3xl bg-[#2b1f17]/80 backdrop-blur-xl p-8 text-center text-white shadow-2xl">
           <h1 className="text-2xl font-semibold">Product not found</h1>
           <Link
@@ -23,7 +23,7 @@ export function ProductDetails() {
             Back to products
           </Link>
         </div>
-      </main>
+      </div>
     );
   }
 
@@ -31,9 +31,8 @@ export function ProductDetails() {
   const decreaseQuantity = () => setQuantity((q) => (q > 1 ? q - 1 : 1));
 
   return (
-    <main
+    <div
       className="
-        min-h-screen px-4 py-10
         bg-gradient-to-br
         from-[#3b2a1f]
         via-[#2b1f17]
@@ -41,28 +40,29 @@ export function ProductDetails() {
         text-white
       "
     >
+      {/* The section below provides its own padding */}
       <section
         className="
-          mx-auto max-w-6xl
-          rounded-3xl
+          mx-auto max-w-5xl
+          rounded-2xl
           border border-white/10
           bg-white/5
           backdrop-blur-xl
-          p-6 sm:p-10
+          p-4 sm:p-6
           shadow-2xl
         "
       >
         {/* Back */}
         <Link
           to="/"
-          className="text-sm text-white/70 hover:text-white transition"
+          className="text-xs sm:text-sm text-white/70 hover:text-white transition"
         >
           ← Back to products
         </Link>
 
-        <div className="mt-8 grid gap-12 md:grid-cols-2 items-center">
+        <div className="mt-6 grid gap-6 md:gap-8 md:grid-cols-2 items-start">
           {/* ================= IMAGE ================= */}
-          <div className="group relative overflow-hidden rounded-3xl">
+          <div className="group relative overflow-hidden rounded-2xl">
             {/* glass glow */}
             <div className="absolute inset-0 bg-white/5 opacity-0 transition group-hover:opacity-100" />
 
@@ -70,57 +70,58 @@ export function ProductDetails() {
               src={product.image}
               alt={product.name}
               className="
-                w-full h-full object-cover
+                w-full h-auto object-cover
                 transition duration-700
                 group-hover:scale-110
+                max-h-96
               "
             />
           </div>
 
           {/* ================= INFO ================= */}
-          <div className="space-y-6">
+          <div className="space-y-4">
             {/* Title */}
             <div>
-              <h1 className="text-4xl font-semibold tracking-tight">
+              <h1 className="text-2xl sm:text-3xl font-semibold tracking-tight">
                 {product.name}
               </h1>
 
-              <p className="mt-3 text-white/70 leading-relaxed">
+              <p className="mt-2 text-sm sm:text-base text-white/70 leading-relaxed">
                 {product.description}
               </p>
             </div>
 
             {/* Price */}
-            <p className="text-3xl font-semibold text-[#e6c9a8]">
+            <p className="text-2xl sm:text-2xl font-semibold text-[#e6c9a8]">
               ₦{product.price.toLocaleString()}
             </p>
 
             {/* Quantity Selector */}
-            <div className="space-y-3">
-              <p className="text-sm text-white/70">Quantity</p>
+            <div className="space-y-2">
+              <p className="text-xs sm:text-sm text-white/70">Quantity</p>
 
               <div
                 className="
-                  inline-flex items-center gap-5
+                  inline-flex items-center gap-3
                   rounded-full
                   border border-white/20
                   bg-white/10
                   backdrop-blur-md
-                  px-5 py-2
+                  px-3 py-1.5
                 "
               >
                 <button
                   onClick={decreaseQuantity}
-                  className="text-xl hover:text-[#e6c9a8] transition"
+                  className="text-base sm:text-lg hover:text-[#e6c9a8] transition"
                 >
                   −
                 </button>
 
-                <span className="text-lg font-medium">{quantity}</span>
+                <span className="text-sm sm:text-base font-medium">{quantity}</span>
 
                 <button
                   onClick={increaseQuantity}
-                  className="text-xl hover:text-[#e6c9a8] transition"
+                  className="text-base sm:text-lg hover:text-[#e6c9a8] transition"
                 >
                   +
                 </button>
@@ -134,7 +135,8 @@ export function ProductDetails() {
                 w-full sm:w-auto
                 rounded-full
                 bg-[#e6c9a8]
-                px-8 py-3
+                px-6 sm:px-8 py-2.5
+                text-sm sm:text-base
                 font-semibold
                 text-[#2b1f17]
                 shadow-lg
@@ -157,6 +159,6 @@ export function ProductDetails() {
           onClose={() => setShowOrderForm(false)}
         />
       )}
-    </main>
+    </div>
   );
 }

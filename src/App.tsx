@@ -1,6 +1,7 @@
 import { Routes, Route, Link, NavLink } from "react-router-dom";
 import { Home } from "./pages/Home";
 import { ProductDetails } from "./pages/ProductDetails";
+import { CategoryPage } from "./pages/CategoryPage";
 import { About } from "./pages/About";
 import { Contact } from "./pages/Contact";
 import "./App.css";
@@ -60,6 +61,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/product/:id" element={<ProductDetails />} />
+          <Route path="/category/:category" element={<CategoryPage />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>

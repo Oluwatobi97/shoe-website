@@ -110,11 +110,15 @@ export function OrderForm({ product, quantity, onClose }: OrderFormProps) {
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Name */}
           <div>
-            <label className="text-sm font-medium text-gray-800 dark:text-gray-300">
+            <label
+              htmlFor="fullName"
+              className="text-sm font-medium text-gray-800 dark:text-gray-300"
+            >
               Full Name
             </label>
 
             <input
+              id="fullName"
               type="text"
               value={fullName}
               onChange={(e) => setFullName(e.target.value)}
@@ -136,11 +140,15 @@ export function OrderForm({ product, quantity, onClose }: OrderFormProps) {
 
           {/* Phone */}
           <div>
-            <label className="text-sm font-medium text-gray-800 dark:text-gray-300">
+            <label
+              htmlFor="phone"
+              className="text-sm font-medium text-gray-800 dark:text-gray-300"
+            >
               Phone Number
             </label>
 
             <input
+              id="phone"
               type="tel"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
