@@ -117,7 +117,9 @@ export function ProductDetails() {
                   −
                 </button>
 
-                <span className="text-sm sm:text-base font-medium">{quantity}</span>
+                <span className="text-sm sm:text-base font-medium">
+                  {quantity}
+                </span>
 
                 <button
                   onClick={increaseQuantity}

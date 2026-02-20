@@ -54,7 +54,9 @@ export function CategorySection({ category, title }: CategorySectionProps) {
 
         {/* Content overlay */}
         <div className="relative z-10">
-          <h3 className="text-base sm:text-lg font-semibold text-white">{title}</h3>
+          <h3 className="text-base sm:text-lg font-semibold text-white">
+            {title}
+          </h3>
           <p className="text-xs text-accent-cream/80 mt-1">
             {categoryProducts.length}{" "}
             {categoryProducts.length === 1 ? "item" : "items"}

@@ -37,7 +37,9 @@ export function ProductCard({ product }: ProductCardProps) {
       </div>
 
       <div>
-        <h3 className="text-sm sm:text-base font-semibold text-white line-clamp-2">{product.name}</h3>
+        <h3 className="text-sm sm:text-base font-semibold text-white line-clamp-2">
+          {product.name}
+        </h3>
         <p className="mt-1.5 text-base sm:text-lg font-medium text-accent-cream">
           ₦{product.price.toLocaleString()}
         </p>
