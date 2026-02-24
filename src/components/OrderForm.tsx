@@ -11,30 +11,39 @@ export function OrderForm({ product, quantity, onClose }: OrderFormProps) {
   const [fullName, setFullName] = useState("");
   const [phone, setPhone] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const API_URL = import.meta.env.VITE_API_URL || "/api";
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!fullName.trim() || !phone.trim()) return;
 
     setSubmitting(true);
 
-    const orderDetails = {
-      productId: product.id,
-      productName: product.name,
-      quantity,
-      fullName: fullName.trim(),
-      phone: phone.trim(),
-      totalPrice: product.price * quantity,
-    };
+    try {
+      const res = await fetch(`${API_URL}/api/orders`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          product: product.name,
+          quantity,
+          total: product.price * quantity,
+          customer: fullName,
+          phone,
+        }),
+      });
 
-    console.log("Order submitted:", orderDetails);
+      const data = await res.json();
 
-    setTimeout(() => {
-      alert("Order Submitted Successfully");
-      setSubmitting(false);
+      alert(data.message);
       onClose();
-    }, 800);
+    } catch (_err) {
+      alert("Failed to submit order");
+    }
+
+    setSubmitting(false);
   };
 
   return (
