@@ -21,19 +21,46 @@ export function OrderForm({ product, quantity, onClose }: OrderFormProps) {
     setSubmitting(true);
 
     try {
-      const res = await fetch(`${API_URL}/orders`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          product: product.name,
-          quantity,
-          total: product.price * quantity,
-          customer: fullName,
-          phone,
-        }),
-      });
+      // Retry logic for Render free tier cold starts
+      let res;
+      let retries = 3;
+
+      while (retries > 0) {
+        try {
+          res = await fetch(`${API_URL}/orders`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              product: product.name,
+              quantity,
+              total: product.price * quantity,
+              customer: fullName,
+              phone,
+            }),
+          });
+
+          // If successful, break out of retry loop
+          if (res.ok) break;
+
+          retries--;
+          if (retries > 0) {
+            console.log(`Request failed, retrying... (${retries} attempts left)`);
+            await new Promise(resolve => setTimeout(resolve, 2000)); // Wait 2 seconds
+          }
+        } catch (fetchError) {
+          console.log(`Network error, retrying... (${retries} attempts left)`, fetchError);
+          retries--;
+          if (retries > 0) {
+            await new Promise(resolve => setTimeout(resolve, 3000)); // Wait 3 seconds for cold start
+          }
+        }
+      }
+
+      if (!res || !res.ok) {
+        throw new Error('Failed to submit order after retries');
+      }
 
       const data = await res.json();
 
