@@ -1,0 +1,5 @@
+{
+  "buildCommand": "cd simple-ecommerce && npm run build",
+  "outputDirectory": "simple-ecommerce/dist",
+  "installCommand": "cd simple-ecommerce && npm install"
+}
