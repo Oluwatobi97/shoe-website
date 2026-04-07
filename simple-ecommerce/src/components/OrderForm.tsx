@@ -12,8 +12,6 @@ export function OrderForm({ product, quantity, onClose }: OrderFormProps) {
   const [phone, setPhone] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const API_URL = import.meta.env.VITE_API_URL || "/api";
-  console.log("VITE_API_URL:", import.meta.env.VITE_API_URL);
-  console.log("API_URL:", API_URL);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -29,7 +27,6 @@ export function OrderForm({ product, quantity, onClose }: OrderFormProps) {
 
       while (retries > 0) {
         try {
-          console.log("Fetching:", `${API_URL}/orders`);
           res = await fetch(`${API_URL}/orders`, {
             method: "POST",
             headers: {
@@ -49,20 +46,25 @@ export function OrderForm({ product, quantity, onClose }: OrderFormProps) {
 
           retries--;
           if (retries > 0) {
-            console.log(`Request failed, retrying... (${retries} attempts left)`);
-            await new Promise(resolve => setTimeout(resolve, 2000)); // Wait 2 seconds
+            console.log(
+              `Request failed, retrying... (${retries} attempts left)`,
+            );
+            await new Promise((resolve) => setTimeout(resolve, 2000)); // Wait 2 seconds
           }
         } catch (fetchError) {
-          console.log(`Network error, retrying... (${retries} attempts left)`, fetchError);
+          console.log(
+            `Network error, retrying... (${retries} attempts left)`,
+            fetchError,
+          );
           retries--;
           if (retries > 0) {
-            await new Promise(resolve => setTimeout(resolve, 3000)); // Wait 3 seconds for cold start
+            await new Promise((resolve) => setTimeout(resolve, 3000)); // Wait 3 seconds for cold start
           }
         }
       }
 
       if (!res || !res.ok) {
-        throw new Error('Failed to submit order after retries');
+        throw new Error("Failed to submit order after retries");
       }
 
       const data = await res.json();
