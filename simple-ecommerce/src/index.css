@@ -1,0 +1,49 @@
+@import "tailwindcss";
+
+@source "../index.html";
+@source "./**/*.{js,ts,jsx,tsx}";
+
+/* Theme colors for black & white */
+@theme {
+  --color-black: #111111;
+  --color-white: #fafafa;
+  --color-gray-light: #f3f3f3;
+  --color-gray-medium: #cccccc;
+  --color-gray-dark: #333333;
+}
+
+/* Optional subtle gradient for background animation */
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Animated background for subtle effect (black & white) */
+.animated-bg {
+  background: linear-gradient(
+    45deg,
+    var(--color-black),
+    var(--color-gray-dark),
+    var(--color-gray-medium)
+  );
+  background-size: 300% 300%;
+  animation: gradientShift 15s ease infinite;
+}
+
+/* Logo hover glow (subtle white glow) */
+.logo-glow:hover {
+  text-shadow:
+    0 0 5px rgba(255, 255, 255, 0.5),
+    0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.logo-glow {
+  transition: text-shadow 0.3s ease;
+}
