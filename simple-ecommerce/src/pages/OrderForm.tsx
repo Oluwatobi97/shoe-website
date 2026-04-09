@@ -11,8 +11,12 @@ export function OrderForm({ product, quantity, onClose }: OrderFormProps) {
   const [fullName, setFullName] = useState("");
   const [phone, setPhone] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const BACKEND_URL =
+    import.meta.env.VITE_API_URL ||
+    "https://shoe-website-backend-bj1t.onrender.com";
+  const orderEndpoint = `${BACKEND_URL.replace(/\/$/, "")}/api/orders`;
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!fullName.trim() || !phone.trim()) {
       alert("Please fill in all fields.");
@@ -20,19 +24,50 @@ export function OrderForm({ product, quantity, onClose }: OrderFormProps) {
     }
 
     setSubmitting(true);
-    console.log("Submitting order:", {
-      product: product.name,
-      quantity,
-      total: product.price * quantity,
-      customer: fullName,
-      phone,
-    });
 
-    // Simulate API call
-    setTimeout(() => {
-      alert("Order submitted successfully!");
+    try {
+      let res;
+      let retries = 3;
+
+      while (retries > 0) {
+        try {
+          res = await fetch(orderEndpoint, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              product: product.name,
+              quantity,
+              total: product.price * quantity,
+              customer: fullName,
+              phone,
+            }),
+          });
+
+          if (res.ok) break;
+          retries--;
+          if (retries > 0) {
+            await new Promise((resolve) => setTimeout(resolve, 2000));
+          }
+        } catch (err) {
+          retries--;
+          if (retries > 0) {
+            await new Promise((resolve) => setTimeout(resolve, 3000));
+          }
+        }
+      }
+
+      if (!res || !res.ok) {
+        throw new Error("Failed to submit order");
+      }
+
+      const data = await res.json();
+      alert(data.message || "Order submitted successfully!");
       onClose();
-    }, 1000);
+    } catch (err) {
+      alert("Failed to submit order. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (

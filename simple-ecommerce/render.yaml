@@ -1,0 +1,13 @@
+services:
+  - type: static
+    name: simple-ecommerce-frontend
+    env: static
+    buildCommand: cd simple-ecommerce && npm install && npm run build
+    publishPath: simple-ecommerce/dist
+    routes:
+      - type: rewrite
+        src: "/(.*)"
+        dest: "/index.html"
+    envVars:
+      - key: VITE_API_URL
+        value: https://shoe-website-backend-bj1t.onrender.com

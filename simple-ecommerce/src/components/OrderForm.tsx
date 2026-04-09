@@ -11,7 +11,10 @@ export function OrderForm({ product, quantity, onClose }: OrderFormProps) {
   const [fullName, setFullName] = useState("");
   const [phone, setPhone] = useState("");
   const [submitting, setSubmitting] = useState(false);
-  const API_URL = import.meta.env.VITE_API_URL || "/api";
+  const BACKEND_URL =
+    import.meta.env.VITE_API_URL ||
+    "https://shoe-website-backend-bj1t.onrender.com";
+  const orderEndpoint = `${BACKEND_URL.replace(/\/$/, "")}/api/orders`;
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -27,7 +30,7 @@ export function OrderForm({ product, quantity, onClose }: OrderFormProps) {
 
       while (retries > 0) {
         try {
-          res = await fetch(`${API_URL}/orders`, {
+          res = await fetch(orderEndpoint, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -71,7 +74,8 @@ export function OrderForm({ product, quantity, onClose }: OrderFormProps) {
 
       alert(data.message);
       onClose();
-    } catch (_err) {
+    } catch (error) {
+      console.error("Order submission failed:", error);
       alert("Failed to submit order");
     }
 
