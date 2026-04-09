@@ -14,7 +14,7 @@ export function OrderForm({ product, quantity, onClose }: OrderFormProps) {
   const BACKEND_URL =
     import.meta.env.VITE_API_URL ||
     "https://shoe-website-backend-bj1t.onrender.com";
-  const orderEndpoint = `${BACKEND_URL.replace(/\/$/, "")}/api/orders`;
+  const orderEndpoint = `${BACKEND_URL.replace(/\/$/, "")}/orders`;
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
